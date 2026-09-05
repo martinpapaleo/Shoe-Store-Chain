@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="GZXrCmb6b6Dv4tREmKT9">
-    <mxGraphModel dx="3207" dy="3602" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#FFFFFF,#121212)" math="0" shadow="0">
+    <mxGraphModel dx="2338" dy="3085" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#FFFFFF,#121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -9,6 +9,14 @@
         </mxCell>
         <mxCell id="FGu3yhGV--KEB5-77xsx-6" edge="1" parent="1" source="5qo1V8oMvxOjMcdFXjxh-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="SrasDsm_TrMyvjVvw0d3-11">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z5D_D6WHfRl4m6SiVuTr-16" edge="1" parent="1" source="5qo1V8oMvxOjMcdFXjxh-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="9vI7Eu0omFtF5K8IuZjM-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="607.5" y="-950" />
+              <mxPoint x="607.5" y="-675.6" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="5qo1V8oMvxOjMcdFXjxh-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;p&gt;BRANCH&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;name&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;address&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;phone&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;opening_date&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;closing_date (nullable)&lt;/p&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="250" width="170" x="330" y="-1140" as="geometry" />
@@ -27,16 +35,6 @@
         </mxCell>
         <mxCell id="SrasDsm_TrMyvjVvw0d3-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;PRODUCT_MODEL&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;model_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;product_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;size&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;color&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;sku (unique)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;discontinued_at (nullable)&lt;/p&gt;" vertex="1">
           <mxGeometry height="260" width="190" x="-220" y="-745" as="geometry" />
-        </mxCell>
-        <mxCell id="yQHgBJ0ornWv8-y8bSy5-2" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="SrasDsm_TrMyvjVvw0d3-12">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="-555" y="-400" />
-              <mxPoint x="430" y="-400" />
-              <mxPoint x="430" y="3.75" />
-            </Array>
-            <mxPoint x="430" y="-30" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="SrasDsm_TrMyvjVvw0d3-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="PRICE_HISTORY&lt;br&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;price_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;model_id (FK)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;price&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;valid_from&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;valid_to (nullable)&lt;/p&gt;" vertex="1">
           <mxGeometry height="250" width="190" x="-650" y="-740" as="geometry" />
@@ -71,10 +69,14 @@
         <mxCell id="SrasDsm_TrMyvjVvw0d3-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;SALES_CHANNEL&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;channel_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;name (in_store, online)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;deactivated_at (nullable)&lt;/p&gt;" vertex="1">
           <mxGeometry height="230" width="170" x="1140" y="-230" as="geometry" />
         </mxCell>
-        <mxCell id="FGu3yhGV--KEB5-77xsx-13" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="SrasDsm_TrMyvjVvw0d3-12">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="Z5D_D6WHfRl4m6SiVuTr-18" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="Z5D_D6WHfRl4m6SiVuTr-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="-242.5" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="SrasDsm_TrMyvjVvw0d3-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;P_MODEL_&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;X_&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;BRANCH&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (PK ) (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;model_id (PK) (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;quantity&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;updated_at&lt;/p&gt;" vertex="1">
+        <mxCell id="SrasDsm_TrMyvjVvw0d3-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;PRODUCT_MODEL_&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;X_&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;BRANCH&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (PK ) (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;model_id (PK) (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;quantity&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;updated_at&lt;/p&gt;" vertex="1">
           <mxGeometry height="210" width="220" x="305" y="-720" as="geometry" />
         </mxCell>
         <mxCell id="Z5D_D6WHfRl4m6SiVuTr-11" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="SrasDsm_TrMyvjVvw0d3-19">
@@ -106,7 +108,7 @@
         <mxCell id="SrasDsm_TrMyvjVvw0d3-27" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="SrasDsm_TrMyvjVvw0d3-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="SrasDsm_TrMyvjVvw0d3-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="ROLE&lt;br&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;role_id (PK)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;role_description&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;start_date&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;end_date (nullable)&lt;/p&gt;" vertex="1">
+        <mxCell id="SrasDsm_TrMyvjVvw0d3-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="ROLE&lt;br&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;role_id (PK)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;role_description&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;deactivated_at (nullable)&lt;/p&gt;" vertex="1">
           <mxGeometry height="180" width="170" x="750" y="-1470" as="geometry" />
         </mxCell>
         <mxCell id="FGu3yhGV--KEB5-77xsx-8" edge="1" parent="1" source="9vI7Eu0omFtF5K8IuZjM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="SrasDsm_TrMyvjVvw0d3-12">
@@ -132,11 +134,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="9vI7Eu0omFtF5K8IuZjM-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;&lt;p&gt;RECEIPT_HEADER&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;receipt_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;emp_period_id (FK) (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;customer_id (FK) (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;channel_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;delivery_type (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;datetime&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;status&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;total&lt;/p&gt;" vertex="1">
+        <mxCell id="9vI7Eu0omFtF5K8IuZjM-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;&lt;p&gt;RECEIPT_HEADER&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;receipt_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (FK) (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;emp_period_id (FK) (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;customer_id (FK) (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;channel_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;delivery_type (nullable)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;datetime&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;status&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;total&lt;/p&gt;" vertex="1">
           <mxGeometry height="327.5" width="240" x="715" y="-757.5" as="geometry" />
-        </mxCell>
-        <mxCell id="yQHgBJ0ornWv8-y8bSy5-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="consultar" vertex="1">
-          <mxGeometry height="30" width="60" x="445" as="geometry" />
         </mxCell>
         <mxCell id="Z5D_D6WHfRl4m6SiVuTr-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="has" vertex="1">
           <mxGeometry height="40" width="60" x="-130" y="-837" as="geometry" />
@@ -158,6 +157,9 @@
         </mxCell>
         <mxCell id="Z5D_D6WHfRl4m6SiVuTr-15" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="logistics not included" vertex="1">
           <mxGeometry height="60" width="80" x="1720" y="-930" as="geometry" />
+        </mxCell>
+        <mxCell id="Z5D_D6WHfRl4m6SiVuTr-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;STOCK_MOVEMENT&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;movement_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;branch_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;model_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;quantity_delta&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;reason&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;" vertex="1">
+          <mxGeometry height="235" width="220" x="40" y="-360" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
