@@ -10,9 +10,9 @@ here — they belong to the physical model.
 
 ## Entity-Relationship Diagram
 
-![Logical Data Model](ShoeStoreChain_Logical_Model.jpg)
+![Logical Data Model](../ShoeStoreChain_Logical_Model.png)
 
-*Diagram source: [`logical-data-model.drawio`](./ShoeStoreChain_Logical_Model.drawio).
+*Diagram source: [`logical-data-model.drawio`](../ShoeStoreChain_Logical_Model.drawio).
 Entity attributes and cardinalities are not shown on the diagram — see
 the sections below.*
 
