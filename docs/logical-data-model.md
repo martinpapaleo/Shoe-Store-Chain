@@ -10,193 +10,200 @@ here — they belong to the physical model.
 
 ## Entity-Relationship Diagram
 
-```mermaid
-erDiagram
-    PRODUCT ||--o{ PRODUCT_MODEL : has
-    PRODUCT_MODEL ||--o{ PRICE_HISTORY : "priced over time"
-    PRODUCT_MODEL ||--o{ PRODUCT_MODEL_X_BRANCH : "stocked as"
-    BRANCH ||--o{ PRODUCT_MODEL_X_BRANCH : stocks
-    PRODUCT_MODEL_X_BRANCH ||--o{ STOCK_MOVEMENT : "history of"
+![Logical Data Model](./logical-data-model.png)
 
-    BRANCH ||--o{ EMPLOYEE_EMPLOYMENT_PERIOD : hosts
-    EMPLOYEE ||--o{ EMPLOYEE_EMPLOYMENT_PERIOD : has
-    ROLE ||--o{ EMPLOYEE_EMPLOYMENT_PERIOD : "held during"
+*Diagram source: [`logical-data-model.drawio`](./logical-data-model.drawio).
+Entity attributes and cardinalities are not shown on the diagram — see
+the sections below.*
 
-    BRANCH ||--o{ RECEIPT_HEADER : issues
-    CUSTOMER |o--o{ RECEIPT_HEADER : places
-    EMPLOYEE_EMPLOYMENT_PERIOD |o--o{ RECEIPT_HEADER : sold_by
-    SALES_CHANNEL ||--o{ RECEIPT_HEADER : "channel of"
+## Entities and Attributes
 
-    RECEIPT_HEADER ||--|{ RECEIPT_DETAIL : contains
-    PRODUCT_MODEL ||--o{ RECEIPT_DETAIL : "sold as"
+### Catalog
 
-    RECEIPT_HEADER ||--o{ RECEIPT_PAYMENT : "paid via"
-    PAYMENT_METHOD ||--o{ RECEIPT_PAYMENT : "used in"
+**PRODUCT**
+| Attribute | Key | Notes |
+|---|---|---|
+| product_id | PK | |
+| product_name | | |
+| brand | | |
+| category | | boys / girls / unisex |
+| season | | |
+| created_at | | |
+| discontinued_at | | nullable |
 
-    RECEIPT_HEADER ||--o| SHIPMENT : "shipped via"
+**PRODUCT_MODEL**
+| Attribute | Key | Notes |
+|---|---|---|
+| model_id | PK | |
+| product_id | FK | |
+| size | | |
+| color | | |
+| sku | UQ | |
+| created_at | | |
+| discontinued_at | | nullable |
 
-    RECEIPT_HEADER ||--o{ RETURN : "returned via"
-    RETURN ||--|{ RETURN_DETAIL : contains
-    RECEIPT_DETAIL ||--o{ RETURN_DETAIL : "returned as"
+**PRICE_HISTORY**
+| Attribute | Key | Notes |
+|---|---|---|
+| price_id | PK | |
+| model_id | FK | |
+| price | | |
+| valid_from | | |
+| valid_to | | nullable |
 
-    BRANCH {
-        int branch_id PK
-        string name
-        string address
-        string phone
-        date opening_date
-        date closing_date "nullable"
-    }
+### Employment
 
-    PRODUCT {
-        int product_id PK
-        string product_name
-        string brand
-        string category "boys / girls / unisex"
-        string season
-        date created_at
-        date discontinued_at "nullable"
-    }
+**BRANCH**
+| Attribute | Key | Notes |
+|---|---|---|
+| branch_id | PK | |
+| name | | |
+| address | | |
+| phone | | |
+| opening_date | | |
+| closing_date | | nullable |
 
-    PRODUCT_MODEL {
-        int model_id PK
-        int product_id FK
-        string size
-        string color
-        string sku UK
-        date created_at
-        date discontinued_at "nullable"
-    }
+**EMPLOYEE**
+| Attribute | Key | Notes |
+|---|---|---|
+| employee_id | PK | |
+| first_name | | |
+| last_name | | |
+| national_id | | |
+| date_of_birth | | |
+| created_at | | |
+| deactivated_at | | nullable |
 
-    PRICE_HISTORY {
-        int price_id PK
-        int model_id FK
-        decimal price
-        date valid_from
-        date valid_to "nullable"
-    }
+**ROLE**
+| Attribute | Key | Notes |
+|---|---|---|
+| role_id | PK | |
+| role_description | | |
+| created_at | | |
+| deactivated_at | | nullable |
 
-    ROLE {
-        int role_id PK
-        string role_description
-        date created_at
-        date deactivated_at "nullable"
-    }
+**EMPLOYEE_PERIOD**
+| Attribute | Key | Notes |
+|---|---|---|
+| emp_period_id | PK | |
+| employee_id | FK | |
+| branch_id | FK | |
+| role_id | FK | |
+| start_date | | |
+| end_date | | nullable |
 
-    EMPLOYEE {
-        int employee_id PK
-        string first_name
-        string last_name
-        string national_id
-        date date_of_birth
-        date created_at
-        date deactivated_at "nullable"
-    }
+### Inventory
 
-    EMPLOYEE_EMPLOYMENT_PERIOD {
-        int emp_period_id PK
-        int employee_id FK
-        int branch_id FK
-        int role_id FK
-        date start_date
-        date end_date "nullable"
-    }
+**PRODUCT_MODEL_X_BRANCH**
+| Attribute | Key | Notes |
+|---|---|---|
+| branch_id | PK, FK | |
+| model_id | PK, FK | |
+| quantity | | |
+| updated_at | | |
 
-    PAYMENT_METHOD {
-        int payment_method_id PK
-        string name
-        date created_at
-        date deactivated_at "nullable"
-    }
+**STOCK_MOVEMENT**
+| Attribute | Key | Notes |
+|---|---|---|
+| movement_id | PK | |
+| branch_id | FK | |
+| model_id | FK | |
+| movement_type | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** (e.g. SALE, RESTOCK, RETURN, ADJUSTMENT) |
+| quantity | | |
+| created_at | | |
 
-    SALES_CHANNEL {
-        int channel_id PK
-        string name "in_store, online"
-        date created_at
-        date deactivated_at "nullable"
-    }
+### Sales
 
-    CUSTOMER {
-        int customer_id PK
-        string first_name
-        string last_name
-        string national_id
-        string email "nullable"
-        string phone "nullable"
-        date created_at
-        date deactivated_at "nullable"
-    }
+**SALES_CHANNEL**
+| Attribute | Key | Notes |
+|---|---|---|
+| channel_id | PK | |
+| name | | in_store, online |
+| created_at | | |
+| deactivated_at | | nullable |
 
-    PRODUCT_MODEL_X_BRANCH {
-        int branch_id PK,FK
-        int model_id PK,FK
-        int quantity
-        datetime updated_at
-    }
+**CUSTOMER**
+| Attribute | Key | Notes |
+|---|---|---|
+| customer_id | PK | |
+| first_name | | |
+| last_name | | |
+| national_id | | |
+| email | | nullable |
+| phone | | nullable |
+| created_at | | |
+| deactivated_at | | nullable |
 
-    STOCK_MOVEMENT {
-        int movement_id PK
-        int branch_id FK
-        int model_id FK
-        int quantity_delta
-        string reason
-        datetime created_at
-    }
+**RECEIPT_HEADER**
+| Attribute | Key | Notes |
+|---|---|---|
+| receipt_id | PK | |
+| branch_id | FK | |
+| emp_period_id | FK | nullable |
+| customer_id | FK | nullable — guest checkout |
+| channel_id | FK | |
+| delivery_type | | nullable |
+| datetime | | |
+| status | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** |
+| total | | |
 
-    RECEIPT_HEADER {
-        int receipt_id PK
-        int branch_id FK
-        int emp_period_id FK "nullable"
-        int customer_id FK "nullable"
-        int channel_id FK
-        string delivery_type "nullable"
-        datetime datetime
-        string status
-        decimal total
-    }
+**RECEIPT_DETAIL**
+| Attribute | Key | Notes |
+|---|---|---|
+| detail_id | PK | |
+| receipt_id | FK | |
+| model_id | FK | |
+| quantity | | |
+| unit_price | | snapshot — see business rules |
+| subtotal | | |
 
-    RECEIPT_DETAIL {
-        int detail_id PK
-        int receipt_id FK
-        int model_id FK
-        int quantity
-        decimal unit_price
-        decimal subtotal
-    }
+**RECEIPT_PAYMENT**
+| Attribute | Key | Notes |
+|---|---|---|
+| payment_id | PK | |
+| receipt_id | FK | |
+| payment_method_id | FK | |
+| amount | | |
+| created_at | | |
 
-    RECEIPT_PAYMENT {
-        int payment_id PK
-        int receipt_id FK
-        int payment_method_id FK
-        decimal amount
-    }
+**PAYMENT_METHOD**
+| Attribute | Key | Notes |
+|---|---|---|
+| payment_method_id | PK | |
+| name | | |
+| created_at | | |
+| deactivated_at | | nullable |
 
-    SHIPMENT {
-        int shipment_id PK
-        int receipt_id FK,UK
-        string carrier
-        string tracking_number
-        string delivery_address
-        string status "pending, in_transit, delivered"
-        datetime shipped_at
-        datetime delivered_at "nullable"
-    }
+**SHIPMENT**
+| Attribute | Key | Notes |
+|---|---|---|
+| shipment_id | PK | |
+| receipt_id | FK, UQ | |
+| carrier | | |
+| tracking_number | | |
+| delivery_address | | |
+| status | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** |
+| shipped_at | | |
+| delivered_at | | nullable |
 
-    RETURN {
-        int return_id PK
-        int receipt_id FK
-        date date
-        string reason
-        string status
-    }
+### Returns
 
-    RETURN_DETAIL {
-        int return_detail_id PK
-        int return_id FK
-        int detail_id FK
-        int quantity_returned
-    }
-```
+**RETURN**
+| Attribute | Key | Notes |
+|---|---|---|
+| return_id | PK | |
+| receipt_id | FK | |
+| date | | |
+| reason | | |
+| status | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** |
+
+**RETURN_DETAIL**
+| Attribute | Key | Notes |
+|---|---|---|
+| return_detail_id | PK | |
+| detail_id | FK | |
+| return_id | FK | |
+| quantity_returned | | |
 
 ## Relationship Summary
 
@@ -211,11 +218,11 @@ erDiagram
 
 | Relationship | Cardinality | Notes |
 |---|---|---|
-| Branch → EmployeeEmploymentPeriod | 1:N | One branch hosts many employment periods |
-| Employee → EmployeeEmploymentPeriod | 1:N | Supports unlimited hire/resign/rehire cycles |
-| Role → EmployeeEmploymentPeriod | 1:N | Role held during a specific period |
+| Branch → EmployeePeriod | 1:N | One branch hosts many employment periods |
+| Employee → EmployeePeriod | 1:N | Supports unlimited hire/resign/rehire cycles |
+| Role → EmployeePeriod | 1:N | Role held during a specific period |
 
-**Business rule:** an employee's `EmployeeEmploymentPeriod` rows must not have overlapping date ranges.
+**Business rule:** an employee's `EmployeePeriod` rows must not have overlapping date ranges.
 
 ### Inventory
 
@@ -223,17 +230,17 @@ erDiagram
 |---|---|---|
 | Branch → ProductModelXBranch | 1:N | Stock tracked per branch |
 | ProductModel → ProductModelXBranch | 1:N | Same variant can have stock rows in multiple branches |
-| ProductModelXBranch → StockMovement | 1:N | Auditable history of quantity changes over time |
+| ProductModelXBranch → StockMovement | 1:N | Auditable history of quantity changes over time, categorized by `movement_type` |
 
 ### Sales
 
 | Relationship | Cardinality | Notes |
 |---|---|---|
 | Branch → ReceiptHeader | 1:N | Every receipt is always associated with a branch, including online sales |
-| Customer → ReceiptHeader | 0/1:N | Optional (guest checkout) |
-| EmployeeEmploymentPeriod → ReceiptHeader | 0/1:N | Optional; captures branch + role at time of sale |
+| Customer → ReceiptHeader | 0/1:N | Optional — guest checkout (walk-in, cash, no customer record) |
+| EmployeePeriod → ReceiptHeader | 0/1:N | Optional; captures branch + role at time of sale |
 | SalesChannel → ReceiptHeader | 1:N | in_store or online |
-| ReceiptHeader → ReceiptDetail | 1:N (min 1) | |
+| ReceiptHeader → ReceiptDetail | 1:N (min 1) | A receipt cannot exist with zero line items. **Not enforceable via FK alone** — requires a `CHECK`/trigger or application-level validation at the physical layer |
 | ProductModel → ReceiptDetail | 1:N | |
 | ReceiptHeader → ReceiptPayment | 1:N | Supports split/combined payment methods |
 | PaymentMethod → ReceiptPayment | 1:N | |
@@ -246,7 +253,7 @@ erDiagram
 | Relationship | Cardinality | Notes |
 |---|---|---|
 | ReceiptHeader → Return | 1:N | A receipt can have multiple return events over time |
-| Return → ReturnDetail | 1:N (min 1) | |
+| Return → ReturnDetail | 1:N (min 1) | Same enforcement caveat as ReceiptHeader → ReceiptDetail |
 | ReceiptDetail → ReturnDetail | 1:N | Total quantity returned must never exceed original quantity sold |
 
 ## Business Rules Without a Direct Foreign Key
@@ -254,7 +261,19 @@ erDiagram
 These are resolved by the application at write time, not enforced by a structural relationship:
 
 - **Price lookup:** when creating a `ReceiptDetail`, the application looks up the currently valid row in `PriceHistory` (`valid_from <= date <= valid_to`) and copies it into `unit_price`.
-- **Stock decrement:** when creating a `ReceiptDetail`, the application decrements `quantity` on the matching `ProductModelXBranch` row (same `branch_id` + `model_id`), and inserts a corresponding `StockMovement` row.
+- **Stock decrement:** when creating a `ReceiptDetail`, the application decrements `quantity` on the matching `ProductModelXBranch` row (same `branch_id` + `model_id`), and inserts a corresponding `StockMovement` row with `movement_type = SALE`.
+
+## Value Domains (To Be Finalized)
+
+Enum-like fields are intentionally left untyped in the logical model.
+Their value sets must be defined here before the physical model is
+implemented, since they become `CHECK` constraints or Postgres `ENUM`
+types directly:
+
+- `RECEIPT_HEADER.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
+- `RETURN.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
+- `SHIPMENT.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
+- `STOCK_MOVEMENT.movement_type` — **PENDING, APPROVED, REJECTED, COMPLETED**
 
 ## Out of Scope (Current Iteration)
 
