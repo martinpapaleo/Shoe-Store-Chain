@@ -1,18 +1,18 @@
 # School Shoe Store Chain — Logical Data Model
 
 This document defines the logical entity-relationship model for a
-multi-branch school shoe retail chain, covering in-store and online
+multi-branch shoe retail chain, covering in-store and online
 sales, returns, inventory, employment history, and stock auditability.
-Promotions are explicitly out of scope for this iteration.
+Product promotions are explicitly out of scope for this iteration.
 
 Data types, constraints, and indexes are intentionally **not** defined
 here — they belong to the physical model.
 
 ## Entity-Relationship Diagram
 
-![Logical Data Model](../ShoeStoreChain_Logical_Model.png)
+![Logical Data Model](../docs\logical-data-model-db-schema.png)
 
-*Diagram source: [`logical-data-model.drawio`](../ShoeStoreChain_Logical_Model.drawio).
+*Diagram source: [`logical-data-model.drawio`](../docs/db_schema_data_model.dbs).
 Entity attributes and cardinalities are not shown on the diagram — see
 the sections below.*
 

@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="GZXrCmb6b6Dv4tREmKT9">
-    <mxGraphModel dx="1897" dy="2823" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#FFFFFF,#121212)" math="0" shadow="0">
+    <mxGraphModel dx="2338" dy="3085" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#FFFFFF,#121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -68,7 +68,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="SrasDsm_TrMyvjVvw0d3-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;PAYMENT_METHOD&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;payment_method_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;name&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;deactivated_at (nullable)&lt;/p&gt;" vertex="1">
-          <mxGeometry height="200" width="170" x="1590" y="152.5" as="geometry" />
+          <mxGeometry height="200" width="170" x="1590" y="142.5" as="geometry" />
         </mxCell>
         <mxCell id="yQHgBJ0ornWv8-y8bSy5-1" edge="1" parent="1" source="SrasDsm_TrMyvjVvw0d3-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="9vI7Eu0omFtF5K8IuZjM-5">
           <mxGeometry relative="1" as="geometry" />
@@ -99,7 +99,7 @@
           <mxGeometry height="285" width="170" x="570" y="-210" as="geometry" />
         </mxCell>
         <mxCell id="SrasDsm_TrMyvjVvw0d3-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;br&gt;&lt;p&gt;RECEIPT_PAYMENT&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;payment_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;receipt_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;payment_method_id (FK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;amount&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;created_at&lt;/p&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="225" width="170" x="1140" y="140" as="geometry" />
+          <mxGeometry height="225" width="170" x="1140" y="130" as="geometry" />
         </mxCell>
         <mxCell id="SrasDsm_TrMyvjVvw0d3-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;p&gt;SHIPMENT&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;shipment_id (PK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;receipt_id (FK, UK)&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;carrier&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;tracking_number&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;delivery_address&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;status&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;shipped_at&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;delivered_at (nullable)&lt;/p&gt;" vertex="1">
           <mxGeometry height="270" width="170" x="1470" y="-960" as="geometry" />
@@ -122,13 +122,14 @@
         <mxCell id="FGu3yhGV--KEB5-77xsx-8" edge="1" parent="1" source="9vI7Eu0omFtF5K8IuZjM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="SrasDsm_TrMyvjVvw0d3-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Z5D_D6WHfRl4m6SiVuTr-1" edge="1" parent="1" source="9vI7Eu0omFtF5K8IuZjM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="SrasDsm_TrMyvjVvw0d3-16">
+        <mxCell id="Z5D_D6WHfRl4m6SiVuTr-1" edge="1" parent="1" source="9vI7Eu0omFtF5K8IuZjM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="SrasDsm_TrMyvjVvw0d3-16">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="900" y="-340" />
-              <mxPoint x="1000" y="-340" />
-              <mxPoint x="1000" y="187.57" />
+              <mxPoint x="900" y="-339.95" />
+              <mxPoint x="1000" y="-339.95" />
+              <mxPoint x="1000" y="186.26" />
             </Array>
+            <mxPoint x="1070" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Z5D_D6WHfRl4m6SiVuTr-10" edge="1" parent="1" source="9vI7Eu0omFtF5K8IuZjM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERoneToMany;endFill=0;" target="SrasDsm_TrMyvjVvw0d3-18">
