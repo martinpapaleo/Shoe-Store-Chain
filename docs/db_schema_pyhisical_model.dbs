@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Shoe-Store-Chain" database="PostgreSQL" id="a9409229-ba8b-410a-b98a-50f1d15e1eb6" >
+	<schema name="shoe-store-chain" >
+		<table name="branch" prior="BRANCH" >
+			<column name="branch_id" type="integer" mandatory="y" />
+			<column name="name" type="varchar" length="100" mandatory="y" />
+			<column name="address" type="varchar" length="100" mandatory="y" />
+			<column name="phone" type="varchar" length="100" mandatory="y" />
+			<column name="opening_date" type="date" mandatory="y" />
+			<column name="closing_date" type="date" />
+			<index name="pk_branch" unique="PRIMARY_KEY" >
+				<column name="branch_id" />
+			</index>
+		</table>
+		<table name="customer" prior="CUSTOMER" >
+			<column name="customer_id" type="integer" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" mandatory="y" />
+			<column name="last_name" type="varchar" length="100" mandatory="y" />
+			<column name="national_id" type="varchar" length="100" mandatory="y" />
+			<column name="email" type="varchar" mandatory="y" />
+			<column name="phone" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="deactivated_at" type="timestamptz" />
+			<index name="pk_customer" unique="PRIMARY_KEY" >
+				<column name="customer_id" />
+			</index>
+		</table>
+		<table name="employee" prior="EMPLOYEE" >
+			<column name="employee_id" type="integer" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" mandatory="y" />
+			<column name="last_name" type="varchar" length="100" mandatory="y" />
+			<column name="national_id" type="varchar" length="100" mandatory="y" />
+			<column name="date_of_birth" type="date" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="deactivated_at" type="timestamptz" />
+			<index name="pk_employee" unique="PRIMARY_KEY" >
+				<column name="employee_id" />
+			</index>
+		</table>
+		<table name="employee_period" prior="EMPLOYEE_PERIOD" >
+			<column name="emp_period_id" prior="employee_period_id" type="integer" mandatory="y" />
+			<column name="employee_id" type="integer" mandatory="y" />
+			<column name="branch_id" type="integer" mandatory="y" />
+			<column name="role_id" type="integer" mandatory="y" />
+			<column name="start_date" type="date" mandatory="y" />
+			<column name="end_date" type="date" />
+			<index name="pk_employee_period" unique="PRIMARY_KEY" >
+				<column name="emp_period_id" />
+			</index>
+			<fk name="fk_employee_period_role" to_schema="shoe-store-chain" to_table="role" >
+				<fk_column name="role_id" pk="role_id" />
+			</fk>
+			<fk name="fk_employee_period_branch" to_schema="shoe-store-chain" to_table="branch" >
+				<fk_column name="branch_id" pk="branch_id" />
+			</fk>
+			<fk name="fk_employee_period_employee" to_schema="shoe-store-chain" to_table="employee" >
+				<fk_column name="employee_id" pk="employee_id" />
+			</fk>
+		</table>
+		<table name="payment_method" prior="PAYMENT_METHOD" >
+			<column name="payment_method_id" type="integer" mandatory="y" />
+			<column name="name" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="deactivated_at" type="timestamptz" />
+			<index name="pk_payment_method" unique="PRIMARY_KEY" >
+				<column name="payment_method_id" />
+			</index>
+		</table>
+		<table name="price_history" prior="PRICE_HISTORY" >
+			<column name="price_id" type="integer" mandatory="y" />
+			<column name="model_id" type="integer" mandatory="y" />
+			<column name="price" type="numeric" length="10" decimal="2" mandatory="y" />
+			<column name="valid_from" type="date" mandatory="y" />
+			<column name="valid_to" type="date" />
+			<index name="pk_price_history" unique="PRIMARY_KEY" >
+				<column name="price_id" />
+			</index>
+			<fk name="fk_price_history_product_model" to_schema="shoe-store-chain" to_table="product_model" >
+				<fk_column name="model_id" pk="model_id" />
+			</fk>
+		</table>
+		<table name="product" prior="PRODUCT" >
+			<column name="product_id" type="integer" mandatory="y" />
+			<column name="product_name" type="varchar" length="100" mandatory="y" />
+			<column name="brand" type="varchar" length="100" mandatory="y" />
+			<column name="category" type="varchar" length="100" mandatory="y" />
+			<column name="season" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="discontinued_at" type="timestamptz" />
+			<index name="pk_product" unique="PRIMARY_KEY" >
+				<column name="product_id" />
+			</index>
+		</table>
+		<table name="product_model" prior="PRODUCT_MODEL" >
+			<column name="model_id" type="integer" mandatory="y" />
+			<column name="product_id" type="integer" mandatory="y" />
+			<column name="size" type="varchar" mandatory="y" />
+			<column name="color" type="varchar" length="100" mandatory="y" />
+			<column name="sku" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="discontinued_at" prior="deactivated_at" type="timestamptz" />
+			<index name="pk_product_model" unique="PRIMARY_KEY" >
+				<column name="model_id" />
+			</index>
+			<index name="unq_product_model" unique="UNIQUE_INDEX" >
+				<column name="sku" />
+			</index>
+			<fk name="fk_product_model_product" to_schema="shoe-store-chain" to_table="product" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="product_model_x_branch" prior="PRODUCT_MODEL_X_BRANCH" >
+			<column name="branch_id" type="integer" mandatory="y" />
+			<column name="model_id" type="integer" mandatory="y" />
+			<column name="quantity" type="integer" mandatory="y" />
+			<column name="updated_at" type="timestamptz" mandatory="y" />
+			<index name="pk_product_model_x_branch" unique="PRIMARY_KEY" >
+				<column name="branch_id" />
+				<column name="model_id" />
+			</index>
+			<fk name="fk_product_model_x_branch_branch" to_schema="shoe-store-chain" to_table="branch" >
+				<fk_column name="branch_id" pk="branch_id" />
+			</fk>
+			<fk name="fk_product_model_x_branch_product_model" to_schema="shoe-store-chain" to_table="product_model" >
+				<fk_column name="model_id" pk="model_id" />
+			</fk>
+		</table>
+		<table name="receipt_detail" prior="RECEIPT_DETAIL" >
+			<column name="detail_id" type="integer" mandatory="y" />
+			<column name="receipt_id" type="integer" mandatory="y" />
+			<column name="model_id" type="integer" mandatory="y" />
+			<column name="quantity" type="integer" mandatory="y" />
+			<column name="unit_price" type="numeric" length="10" decimal="2" mandatory="y" />
+			<column name="subtotal" type="numeric" length="10" decimal="2" mandatory="y" />
+			<index name="pk_receipt_detail" unique="PRIMARY_KEY" >
+				<column name="detail_id" />
+			</index>
+			<fk name="fk_receipt_detail_receipt_header" to_schema="shoe-store-chain" to_table="receipt_header" >
+				<fk_column name="receipt_id" pk="receipt_id" />
+			</fk>
+			<fk name="fk_receipt_detail_product_model" to_schema="shoe-store-chain" to_table="product_model" >
+				<fk_column name="model_id" pk="model_id" />
+			</fk>
+		</table>
+		<table name="receipt_header" prior="RECEIPT_HEADER" >
+			<column name="receipt_id" type="integer" mandatory="y" />
+			<column name="branch_id" type="integer" mandatory="y" />
+			<column name="emp_period_id" type="integer" mandatory="y" />
+			<column name="customer_id" type="integer" mandatory="y" />
+			<column name="channel_id" type="integer" mandatory="y" />
+			<column name="delivery_type" type="varchar" />
+			<column name="datetime" type="timestamptz" mandatory="y" />
+			<column name="status" type="varchar" mandatory="y" >
+				<enumeration><![CDATA[PENDING, COMPLETED, CANCELLED]]></enumeration>
+			</column>
+			<column name="total" type="numeric" length="10" decimal="2" mandatory="y" />
+			<index name="pk_receipt_header" unique="PRIMARY_KEY" >
+				<column name="receipt_id" />
+			</index>
+			<fk name="fk_receipt_header_branch" to_schema="shoe-store-chain" to_table="branch" >
+				<fk_column name="branch_id" pk="branch_id" />
+			</fk>
+			<fk name="fk_receipt_header_employee_period" to_schema="shoe-store-chain" to_table="employee_period" >
+				<fk_column name="emp_period_id" pk="emp_period_id" />
+			</fk>
+			<fk name="fk_receipt_header_customer" to_schema="shoe-store-chain" to_table="customer" >
+				<fk_column name="customer_id" pk="customer_id" />
+			</fk>
+			<fk name="fk_receipt_header_sales_channel" to_schema="shoe-store-chain" to_table="sales_channel" >
+				<fk_column name="channel_id" pk="channel_id" />
+			</fk>
+		</table>
+		<table name="receipt_payment" prior="RECEIPT_PAYMENT" >
+			<column name="payment_id" type="integer" mandatory="y" />
+			<column name="receipt_id" type="integer" mandatory="y" />
+			<column name="payment_method_id" type="integer" mandatory="y" />
+			<column name="amount" type="numeric" length="10" decimal="2" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<index name="pk_receipt_payment" unique="PRIMARY_KEY" >
+				<column name="payment_id" />
+			</index>
+			<fk name="fk_receipt_payment_receipt_header" to_schema="shoe-store-chain" to_table="receipt_header" >
+				<fk_column name="receipt_id" pk="receipt_id" />
+			</fk>
+			<fk name="fk_receipt_payment_payment_method" to_schema="shoe-store-chain" to_table="payment_method" >
+				<fk_column name="payment_method_id" pk="payment_method_id" />
+			</fk>
+		</table>
+		<table name="return" prior="RETURN" >
+			<column name="return_id" type="integer" mandatory="y" />
+			<column name="receipt_id" type="integer" mandatory="y" />
+			<column name="date" type="date" mandatory="y" />
+			<column name="reason" type="varchar" length="100" mandatory="y" />
+			<column name="status" type="varchar" mandatory="y" />
+			<index name="pk_return" unique="PRIMARY_KEY" >
+				<column name="return_id" />
+			</index>
+			<fk name="fk_return_receipt_header" to_schema="shoe-store-chain" to_table="receipt_header" >
+				<fk_column name="receipt_id" pk="receipt_id" />
+			</fk>
+		</table>
+		<table name="return_detail" prior="RETURN_DETAIL" >
+			<column name="return_detail_id" type="integer" mandatory="y" />
+			<column name="detail_id" type="integer" mandatory="y" />
+			<column name="return_id" type="integer" mandatory="y" />
+			<column name="quantity_returned" type="integer" mandatory="y" />
+			<index name="pk_return_detail" unique="PRIMARY_KEY" >
+				<column name="return_detail_id" />
+			</index>
+			<fk name="fk_return_detail_receipt_detail" to_schema="shoe-store-chain" to_table="receipt_detail" >
+				<fk_column name="detail_id" pk="detail_id" />
+			</fk>
+			<fk name="fk_return_detail_return" to_schema="shoe-store-chain" to_table="return" >
+				<fk_column name="return_id" pk="return_id" />
+			</fk>
+		</table>
+		<table name="role" prior="ROLE" >
+			<column name="role_id" type="integer" mandatory="y" />
+			<column name="role_description" prior="role_descriptioni" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="deactivated_at" type="timestamptz" />
+			<index name="pk_role" unique="PRIMARY_KEY" >
+				<column name="role_id" />
+			</index>
+		</table>
+		<table name="sales_channel" prior="SALES_CHANNEL" >
+			<column name="channel_id" type="integer" mandatory="y" />
+			<column name="name" type="varchar" length="100" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<column name="deactivated_at" type="timestamptz" />
+			<index name="pk_sales_channel" unique="PRIMARY_KEY" >
+				<column name="channel_id" />
+			</index>
+		</table>
+		<table name="shipment" prior="SHIPMENT" >
+			<column name="shipment_id" type="integer" mandatory="y" />
+			<column name="receipt_id" type="integer" mandatory="y" />
+			<column name="carrier" type="varchar" length="100" mandatory="y" />
+			<column name="tracking_number" type="varchar" length="100" mandatory="y" />
+			<column name="delivery_address" prior="address" type="varchar" length="100" mandatory="y" />
+			<column name="status" type="varchar" mandatory="y" >
+				<enumeration><![CDATA[BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD, CANCELLED]]></enumeration>
+			</column>
+			<column name="shipped_at" type="timestamptz" mandatory="y" />
+			<column name="delivered_at" type="timestamptz" />
+			<index name="pk_shipment" unique="PRIMARY_KEY" >
+				<column name="shipment_id" />
+			</index>
+			<index name="unq_shipment" unique="UNIQUE_KEY" >
+				<column name="receipt_id" />
+			</index>
+			<fk name="fk_shipment_receipt_header" to_schema="shoe-store-chain" to_table="receipt_header" >
+				<fk_column name="receipt_id" pk="receipt_id" />
+			</fk>
+		</table>
+		<table name="stock_movement" prior="STOCK_MOVEMENT" >
+			<column name="movement_id" type="integer" mandatory="y" />
+			<column name="branch_id" type="integer" mandatory="y" />
+			<column name="model_id" type="integer" mandatory="y" />
+			<column name="movement_type" type="varchar" mandatory="y" />
+			<column name="quantity" type="integer" mandatory="y" />
+			<column name="created_at" type="timestamptz" mandatory="y" />
+			<index name="pk_stock_movement" unique="PRIMARY_KEY" >
+				<column name="movement_id" />
+			</index>
+			<fk name="fk_stock_movement_product_model_x_branch" to_schema="shoe-store-chain" to_table="product_model_x_branch" >
+				<fk_column name="branch_id" pk="branch_id" />
+				<fk_column name="model_id" pk="model_id" />
+			</fk>
+		</table>
+	</schema>
+	<diagram_group name="Default" id="1daa5aa3-be8f-4761-83e3-1c007eb5efc3" >
+		<diagram name="Default Diagram" id="b9efd32c-6848-4b21-b42e-edb63d582f75" confirmed="y" show_relation="columns" >
+			<entity schema="shoe-store-chain" name="branch" color="C1D8EE" x="741" y="285" />
+			<entity schema="shoe-store-chain" name="customer" color="C1D8EE" x="1444" y="608" />
+			<entity schema="shoe-store-chain" name="employee" color="C1D8EE" x="1425" y="285" />
+			<entity schema="shoe-store-chain" name="employee_period" color="C1D8EE" x="1064" y="285" />
+			<entity schema="shoe-store-chain" name="payment_method" color="C1D8EE" x="1786" y="1159" />
+			<entity schema="shoe-store-chain" name="price_history" color="C1D8EE" x="57" y="608" />
+			<entity schema="shoe-store-chain" name="product" color="C1D8EE" x="399" y="285" />
+			<entity schema="shoe-store-chain" name="product_model" color="C1D8EE" x="399" y="608" />
+			<entity schema="shoe-store-chain" name="product_model_x_branch" color="C1D8EE" x="722" y="608" />
+			<entity schema="shoe-store-chain" name="receipt_detail" color="C1D8EE" x="741" y="912" />
+			<entity schema="shoe-store-chain" name="receipt_header" color="C1D8EE" x="1083" y="608" />
+			<entity schema="shoe-store-chain" name="receipt_payment" color="C1D8EE" x="1463" y="1178" />
+			<entity schema="shoe-store-chain" name="return" color="C1D8EE" x="1102" y="1178" />
+			<entity schema="shoe-store-chain" name="return_detail" color="C1D8EE" x="741" y="1197" />
+			<entity schema="shoe-store-chain" name="role" color="C1D8EE" x="1064" y="57" />
+			<entity schema="shoe-store-chain" name="sales_channel" color="C1D8EE" x="1444" y="912" />
+			<entity schema="shoe-store-chain" name="shipment" color="C1D8EE" x="1748" y="494" />
+			<entity schema="shoe-store-chain" name="stock_movement" color="C1D8EE" x="380" y="912" />
+		</diagram>
+	</diagram_group>
+</project>
