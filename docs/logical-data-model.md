@@ -108,7 +108,7 @@ the sections below.*
 | movement_id | PK | |
 | branch_id | FK | |
 | model_id | FK | |
-| movement_type | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** (e.g. SALE, RESTOCK, RETURN, ADJUSTMENT) |
+| movement_type | | domain: **ADD, DEDUCT** |
 | quantity | | |
 | created_at | | |
 
@@ -272,8 +272,8 @@ types directly:
 
 - `RECEIPT_HEADER.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
 - `RETURN.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
-- `SHIPMENT.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
-- `STOCK_MOVEMENT.movement_type` — **PENDING, APPROVED, REJECTED, COMPLETED**
+- `SHIPMENT.status` — **BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD, CANCELLED**
+- `STOCK_MOVEMENT.movement_type` — **SALE, RESTOCK, RETURN, ADJUSTMENT**
 
 ## Out of Scope (Current Iteration)
 
