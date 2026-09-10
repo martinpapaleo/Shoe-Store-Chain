@@ -10,11 +10,21 @@ here — they belong to the physical model.
 
 ## Entity-Relationship Diagram
 
-![Logical Data Model](../docs\logical-data-model-db-schema.png)
+![Logical Data Model](./logical-data-model-db-schema.png)
 
-*Diagram source: [`logical-data-model.drawio`](../docs/db_schema_data_model.dbs).
+*Diagram source: [`db_schema_data_model.dbs`](./db_schema_data_model.dbs).
 Entity attributes and cardinalities are not shown on the diagram — see
 the sections below.*
+
+## Notation Reference
+
+- **PK** — Primary Key
+- **FK** — Foreign Key
+- **UQ** — Unique constraint
+- **`1:N`** — one row on the left relates to many rows on the right
+- **`0/1:N`** — same as above, but the relationship is optional (the FK is nullable)
+- **`1:0/1`** — one row on the left relates to at most one row on the right (optional on the right side)
+- **`(min 1)`** — the child side of the relationship must have at least one row; a parent record cannot exist with zero children. This is a business rule, not something a Foreign Key can enforce on its own — it requires a `CHECK` constraint, trigger, or application-level validation at the physical layer.
 
 ## Entities and Attributes
 
@@ -86,9 +96,9 @@ the sections below.*
 | Attribute | Key | Notes |
 |---|---|---|
 | emp_period_id | PK | |
-| employee_id | FK | |
-| branch_id | FK | |
-| role_id | FK | |
+| employee_id | FK | mandatory |
+| branch_id | FK | mandatory |
+| role_id | FK | mandatory |
 | start_date | | |
 | end_date | | nullable |
 
@@ -97,8 +107,8 @@ the sections below.*
 **PRODUCT_MODEL_X_BRANCH**
 | Attribute | Key | Notes |
 |---|---|---|
-| branch_id | PK, FK | |
-| model_id | PK, FK | |
+| branch_id | PK, FK | composite key with model_id |
+| model_id | PK, FK | composite key with branch_id |
 | quantity | | |
 | updated_at | | |
 
@@ -106,9 +116,9 @@ the sections below.*
 | Attribute | Key | Notes |
 |---|---|---|
 | movement_id | PK | |
-| branch_id | FK | |
-| model_id | FK | |
-| movement_type | | domain: **ADD, DEDUCT** |
+| branch_id | FK | composite FK with model_id → PRODUCT_MODEL_X_BRANCH |
+| model_id | FK | composite FK with branch_id → PRODUCT_MODEL_X_BRANCH |
+| movement_type | | domain: **SALE, RESTOCK, RETURN, ADJUSTMENT** |
 | quantity | | |
 | created_at | | |
 
@@ -138,13 +148,13 @@ the sections below.*
 | Attribute | Key | Notes |
 |---|---|---|
 | receipt_id | PK | |
-| branch_id | FK | |
+| branch_id | FK | mandatory |
 | emp_period_id | FK | nullable |
 | customer_id | FK | nullable — guest checkout |
-| channel_id | FK | |
+| channel_id | FK | mandatory |
 | delivery_type | | nullable |
 | datetime | | |
-| status | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** |
+| status | | domain: **PENDING, COMPLETED, CANCELLED** |
 | total | | |
 
 **RECEIPT_DETAIL**
@@ -182,7 +192,7 @@ the sections below.*
 | carrier | | |
 | tracking_number | | |
 | delivery_address | | |
-| status | | domain: **PENDING, APPROVED, REJECTED, COMPLETED** |
+| status | | domain: **BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD, CANCELLED** |
 | shipped_at | | |
 | delivered_at | | nullable |
 
@@ -240,7 +250,7 @@ the sections below.*
 | Customer → ReceiptHeader | 0/1:N | Optional — guest checkout (walk-in, cash, no customer record) |
 | EmployeePeriod → ReceiptHeader | 0/1:N | Optional; captures branch + role at time of sale |
 | SalesChannel → ReceiptHeader | 1:N | in_store or online |
-| ReceiptHeader → ReceiptDetail | 1:N (min 1) | A receipt cannot exist with zero line items. **Not enforceable via FK alone** — requires a `CHECK`/trigger or application-level validation at the physical layer |
+| ReceiptHeader → ReceiptDetail | 1:N (min 1) | See Notation Reference for enforcement caveat |
 | ProductModel → ReceiptDetail | 1:N | |
 | ReceiptHeader → ReceiptPayment | 1:N | Supports split/combined payment methods |
 | PaymentMethod → ReceiptPayment | 1:N | |
@@ -253,7 +263,7 @@ the sections below.*
 | Relationship | Cardinality | Notes |
 |---|---|---|
 | ReceiptHeader → Return | 1:N | A receipt can have multiple return events over time |
-| Return → ReturnDetail | 1:N (min 1) | Same enforcement caveat as ReceiptHeader → ReceiptDetail |
+| Return → ReturnDetail | 1:N (min 1) | See Notation Reference for enforcement caveat |
 | ReceiptDetail → ReturnDetail | 1:N | Total quantity returned must never exceed original quantity sold |
 
 ## Business Rules Without a Direct Foreign Key
@@ -262,18 +272,6 @@ These are resolved by the application at write time, not enforced by a structura
 
 - **Price lookup:** when creating a `ReceiptDetail`, the application looks up the currently valid row in `PriceHistory` (`valid_from <= date <= valid_to`) and copies it into `unit_price`.
 - **Stock decrement:** when creating a `ReceiptDetail`, the application decrements `quantity` on the matching `ProductModelXBranch` row (same `branch_id` + `model_id`), and inserts a corresponding `StockMovement` row with `movement_type = SALE`.
-
-## Value Domains (To Be Finalized)
-
-Enum-like fields are intentionally left untyped in the logical model.
-Their value sets must be defined here before the physical model is
-implemented, since they become `CHECK` constraints or Postgres `ENUM`
-types directly:
-
-- `RECEIPT_HEADER.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
-- `RETURN.status` — **PENDING, APPROVED, REJECTED, COMPLETED**
-- `SHIPMENT.status` — **BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD, CANCELLED**
-- `STOCK_MOVEMENT.movement_type` — **SALE, RESTOCK, RETURN, ADJUSTMENT**
 
 ## Out of Scope (Current Iteration)
 

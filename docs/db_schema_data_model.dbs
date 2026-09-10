@@ -150,7 +150,9 @@
 			<column name="channel_id" type="INT" mandatory="y" />
 			<column name="delivery_type" type="VARCHAR" />
 			<column name="datetime" type="DATETIME" mandatory="y" />
-			<column name="status" type="ENUM" mandatory="y" />
+			<column name="status" type="ENUM" mandatory="y" >
+				<enumeration><![CDATA[PENDING, COMPLETED, CANCELLED]]></enumeration>
+			</column>
 			<column name="total" type="MONEY" mandatory="y" />
 			<index name="pk_RECEIPT_HEADER" unique="PRIMARY_KEY" >
 				<column name="receipt_id" />
@@ -237,7 +239,7 @@
 			<column name="tracking_number" type="VARCHAR" length="100" mandatory="y" />
 			<column name="delivery_address" prior="address" type="VARCHAR" length="100" mandatory="y" />
 			<column name="status" type="ENUM" mandatory="y" >
-				<enumeration><![CDATA[BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD]]></enumeration>
+				<enumeration><![CDATA[BOOKED, IN_TRANSIT, DELIVERED, ON_HOLD, CANCELLED]]></enumeration>
 			</column>
 			<column name="shipped_at" type="DATETIME" mandatory="y" />
 			<column name="delivered_at" type="DATETIME" />
