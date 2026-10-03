@@ -45,13 +45,13 @@ the approach:
 | # | Step | Status |
 |---|------|--------|
 | 1 | Define the business and its requirements | ✅ Done |
-| 2 | Logical Data Model | 🔄 In progress |
-| 3 | Physical Data Model | ⬜ Not started |
-| 4 | Learn PostgreSQL | ⬜ Not started |
-| 5 | Learn Docker | ⬜ Not started |
-| 6 | Learn basic Linux/CLI + PostgreSQL tooling | ⬜ Not started |
+| 2 | Logical Data Model | ✅ Done |
+| 3 | Physical Data Model | ✅ Done |
+| 4 | Learn PostgreSQL | ✅ Done |
+| 5 | Learn Docker | ✅ Done |
+| 6 | Learn basic Linux/CLI + PostgreSQL tooling | ✅ Done |
 | 7 | Generate synthetic data with Python | ⬜ Not started |
-| 8 | Build and populate the operational database | ⬜ Not started |
+| 8 | Build and populate the operational database | 🔄 Schema deployed; data population not started |
 | 9 | Design the Data Warehouse | ⬜ Not started |
 | 10 | Build the ETL/ELT pipeline | ⬜ Not started |
 | 11 | Add data-quality checks | ⬜ Not started |
@@ -116,11 +116,10 @@ Full entity definitions and relationships are documented in
 - SQL Server (prior coursework projects)
 - Git / GitHub
 - DBSchema (data modeling)
-
-**Learning next, in this project:**
 - PostgreSQL
 - Docker / Docker Compose
-- Linux / command line fundamentals
+
+**Learning next, in this project:**
 - Apache Airflow
 
 **Explicitly postponed** (not needed for this project's scope):
@@ -141,15 +140,6 @@ advanced cloud infrastructure.
   stock on a sale) are resolved by application logic at write time, not
   by a foreign key — this is documented explicitly to avoid confusing
   "how the data is used" with "how the tables are structured."
-
-## Related Projects in This Portfolio
-
-- **Retail Sales ETL Pipeline** — a completed, modular batch ETL
-  pipeline (Python, Pandas, Parquet). Demonstrates foundational ETL and
-  data validation; considered finished and intentionally not being
-  over-polished.
-- **SQL Server / Database coursework projects** — demonstrate prior
-  relational database design knowledge.
 
 ---
 
