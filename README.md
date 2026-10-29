@@ -46,12 +46,12 @@ the approach:
 |---|------|--------|
 | 1 | Define the business and its requirements | ✅ Done |
 | 2 | Logical Data Model | ✅ Done |
-| 3 | Physical Data Model | ✅ Done |
+| 3 | Physical Data Model | ✅ Specified (constraints and triggers designed) |
 | 4 | Learn PostgreSQL | ✅ Done |
 | 5 | Learn Docker | ✅ Done |
 | 6 | Learn basic Linux/CLI + PostgreSQL tooling | ✅ Done |
 | 7 | Generate synthetic data with Python | ⬜ Not started |
-| 8 | Build and populate the operational database | 🔄 Schema deployed; data population not started |
+| 8 | Build and populate the operational database | 🔄 In progress: DDL implementation in PostgreSQL + Docker; data population not started |
 | 9 | Design the Data Warehouse | ⬜ Not started |
 | 10 | Build the ETL/ELT pipeline | ⬜ Not started |
 | 11 | Add data-quality checks | ⬜ Not started |
@@ -81,10 +81,10 @@ online sales channel. Key aspects the model needs to support:
 
 ## Logical Data Model
 
-The logical model is being designed independently of any specific
-database engine — no data types yet, just entities, attributes,
+The logical model was designed independently of any specific
+database engine — no data types, just entities, attributes,
 relationships, and cardinalities. Data types, constraints, and indexes
-are deliberately deferred to the physical model step, where they belong.
+were deliberately deferred to the physical model step, where they belong.
 
 Current entity groups:
 
